@@ -12,9 +12,8 @@ from flask_gravatar import Gravatar
 from functools import wraps
 import os
 from dotenv import load_dotenv
+# load_dotenv('.env')
 
-
-load_dotenv('.env')
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('app_secret_key')
@@ -22,7 +21,7 @@ ckeditor = CKEditor(app)
 Bootstrap(app)
 
 # CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('db_link')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', "sqlite:///blog.db")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
